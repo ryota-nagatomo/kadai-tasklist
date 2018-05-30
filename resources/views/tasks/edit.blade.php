@@ -10,7 +10,11 @@
         {!! Form::text('content') !!}
         
         {!! Form::label('status', '状況:') !!}
-        {!! Form::text('status')!!}
+        {!! Form::select('status', [
+           '完了' => '完了',
+           '進行中' => '進行中',
+           '未着手' => '未着手',
+           '締め切り間近'=>'締め切り間近'])!!}
 
         {!! Form::submit('更新') !!}
 
