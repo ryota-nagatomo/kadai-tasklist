@@ -15,7 +15,7 @@ class AddDueImportantanceToTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->string('importance',10);
-            $table->string('due');
+            $table->string('due',10);
         });
     }
 
