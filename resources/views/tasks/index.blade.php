@@ -7,7 +7,11 @@
     @if (count($tasks) > 0)
         <ul>
             @foreach ($tasks as $task)
-                <li>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!} : {{ $task->content }} > {{ $task->status }}</li>
+                <?php $DUE = '';?>
+                <?php if($task->status != '完了'){
+                    $DUE = '> by ' .$task->due ;
+                }?>
+                <li>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!} : {{ $task->content }} > {{ $task->status }} {{ $DUE }} </li>
             @endforeach
         </ul>
     @endif

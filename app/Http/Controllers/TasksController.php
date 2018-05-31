@@ -49,12 +49,15 @@ class TasksController extends Controller
         $this->validate($request, [
             'status' => 'required|max:10',   // add
             'content' => 'required|max:191',
+            'importance' => 'required|max:10',
         ]);
 
         
         $task = new Task;
         $task->content = $request->content;
         $task->status = $request->status;
+        $task->importance = $request->importance;
+        $task->due = $request->due;
         $task->save();
 
         return redirect('/');
@@ -102,12 +105,15 @@ class TasksController extends Controller
         $this->validate($request, [
             'status' => 'required|max:10',   // add
             'content' => 'required|max:191',
+            'importance' => 'required|max:10',
         ]);
 
         
         $task = Task::find($id);
         $task->content = $request->content;
         $task->status = $request->status;
+        $task->importance = $request->importance;
+        $task->due = $request->due;
         $task->save();
 
         return redirect('/');
