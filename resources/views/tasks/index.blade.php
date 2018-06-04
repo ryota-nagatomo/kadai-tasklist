@@ -5,17 +5,33 @@
     <h1>タスク一覧</h1>
 
     @if (count($tasks) > 0)
-        <ul>
-            @foreach ($tasks as $task)
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>タスク</th>
+                    <th>状況</th>
+                    <th>締め切り</th>
+                </tr>
+            </thead>
+            <tbody>    
+                @foreach ($tasks as $task)
                 <?php $DUE = '';?>
                 <?php if($task->status != '完了'){
-                    $DUE = '> by ' .$task->due ;
+                    $DUE = $task->due ;
                 }?>
-                <li>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!} : {{ $task->content }} > {{ $task->status }} {{ $DUE }} </li>
-            @endforeach
-        </ul>
+                    <tr>
+                        <td>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!}</td>
+                        <td>{{ $task->content }}</td>
+                        <td>{{ $task->status }}</td>
+                        <td>{{ $DUE }}</td>
+                    </tr>
+                
+                @endforeach
+            </tbody>
+        </table>
     @endif
     
-    {!! link_to_route('tasks.create', '新規タスクの投稿') !!}
+    {!! link_to_route('tasks.create', '新規タスクの投稿', null, ['class' => 'btn btn-primary']) !!}
 
 @endsection
