@@ -8,7 +8,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>id</th>
+                    <th>ID</th>
                     <th>タスク</th>
                     <th>状況</th>
                     <th>締め切り</th>

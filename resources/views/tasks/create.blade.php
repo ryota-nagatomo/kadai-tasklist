@@ -35,6 +35,7 @@
             </div>
     
             <div class="form-group">
+                <span class="glyphicon glyphicon-calendar"></span>
                 {!! Form::label('due', '締め切り:') !!}
                 {!! Form::date('due', null, ['class' => 'form-control']) !!}
             </div>

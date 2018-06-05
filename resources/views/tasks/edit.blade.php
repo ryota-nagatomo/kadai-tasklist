@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>id: {{ $task->id }} のタスク編集ページ</h1>
+    <h1>ID: {{ $task->id }} のタスク編集ページ</h1>
 
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
@@ -35,6 +35,7 @@
             </div>
     
             <div class="form-group">
+                <span class="glyphicon glyphicon-calendar"></span>
                 {!! Form::label('due', '締め切り:') !!}
                 {!! Form::date('due', null, ['class' => 'form-control']) !!}
             </div>
