@@ -15,8 +15,7 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+     public function index(){
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
@@ -64,8 +63,8 @@ class TasksController extends Controller
             'status' => 'required|max:10',   // add
             'content' => 'required|max:191',
             'importance' => 'required|max:10',
+            'due' => 'required',
         ]);
-
         $request->user()->tasks()->create([
             'content' => $request->content,
             'status' => $request->status,
@@ -85,10 +84,16 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Task::find($id);
-
-        return view('tasks.show', [
+        $user = \Auth::user();
+        
+        if($user->id == $task->user_id){
+            return view('tasks.show', [
             'task' => $task,
         ]);
+        }
+        else{
+             return view('welcome');
+        }
     }
 
     /**
@@ -100,10 +105,16 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-
+        $user = \Auth::user();
+        if($user->id == $task->user_id){
+        
         return view('tasks.edit', [
             'task' => $task,
         ]);
+        }
+        else{
+            return view('welcome');
+        }
     }
 
     /**
@@ -119,9 +130,8 @@ class TasksController extends Controller
             'status' => 'required|max:10',   // add
             'content' => 'required|max:191',
             'importance' => 'required|max:10',
+            'due' => 'required',
         ]);
-
-        
         $task = Task::find($id);
         $task->content = $request->content;
         $task->status = $request->status;

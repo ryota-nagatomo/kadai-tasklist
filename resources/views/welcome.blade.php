@@ -3,8 +3,8 @@
     @section('content')
         @if(Auth::check())
             <?php $user = Auth::user(); ?>
-            {{ $user->name }}
-        
+            <p>本人以外は閲覧できません。</p>
+    
         @else
             <div class="center jumbotron">
                 <div class="text-center">
