@@ -84,18 +84,23 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Task::find($id);
-        $user = \Auth::user();
+        if( $task != null){
+            
+            $user = \Auth::user();
         
-        if($user->id == $task->user_id){
-            return view('tasks.show', [
-            'task' => $task,
-        ]);
+            if($user->id == $task->user_id){
+                return view('tasks.show', [
+                'task' => $task,
+            ]);
+            }
+            else{
+                return view('welcome');
+            }
         }
         else{
-             return view('welcome');
+            return redirect('/');
         }
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,16 +110,23 @@ class TasksController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-        $user = \Auth::user();
-        if($user->id == $task->user_id){
         
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if( $task != null){
+            $user = \Auth::user();
+            if($user->id == $task->user_id){
+        
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+            }
+            else{
+                return view('welcome');
+            }
         }
         else{
-            return view('welcome');
+            return redirect('/');
         }
+            
     }
 
     /**
