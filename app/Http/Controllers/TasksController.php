@@ -145,13 +145,22 @@ class TasksController extends Controller
             'due' => 'required',
         ]);
         $task = Task::find($id);
-        $task->content = $request->content;
-        $task->status = $request->status;
-        $task->importance = $request->importance;
-        $task->due = $request->due;
-        $task->save();
+        $user = \Auth::user();
+        
+        if($user->id == $task->user_id){
+            $task->content = $request->content;
+            $task->status = $request->status;
+            $task->importance = $request->importance;
+            $task->due = $request->due;
+            $task->save();
 
-        return redirect('/');
+            return redirect('/');
+        }
+        
+         else{
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -163,8 +172,17 @@ class TasksController extends Controller
     public function destroy($id)
     {
         $task = Task::find($id);
-        $task->delete();
+        $user = \Auth::user();
+        
+        if($user->id == $task->user_id){
+        
+            $task->delete();
 
-        return redirect('/');
+            return redirect('/');
+        }
+        else{
+            return redirect('/');
+        }
+        
     }
 }
